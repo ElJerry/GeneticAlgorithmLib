@@ -3,4 +3,11 @@ project(GeneticAlgorithmLib)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_library(GeneticAlgorithmLib src/main.cpp)
+include_directories(include)
+
+add_library(GeneticAlgorithmLib
+        src/GeneticAlgorithmLib.cpp
+        src/MemoryManager.cpp)
+
+
+add_subdirectory(tests)

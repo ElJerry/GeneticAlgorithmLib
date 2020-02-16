@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <cstdio>
+#include <iostream>
 
 #define MAX_MEM_SIZE 500
 
@@ -15,7 +16,8 @@ public:
         instances.assign(MAX_MEM_SIZE, nullptr);
     };
 
-    int create() {
+    template <class ...ARGS>
+    int create(ARGS ...args) {
         static int nextPosition = 0;
 
         int handle = nextPosition;
@@ -24,11 +26,12 @@ public:
         // TODO: avoid collisions with already used instance
         nextPosition = (nextPosition + 1) % MAX_MEM_SIZE;
 
-        if (instances[nextPosition] == nullptr) {
-            instances[nextPosition] = new T();
+        if (instances[handle] == nullptr) {
+            auto instance = new T(args...);
+            instances[handle] = instance;
         }
 
-        printf("Returning %d handle\n", nextPosition);
+        printf("Returning %d handle\n", handle);
         return handle;
     }
 
@@ -37,7 +40,10 @@ public:
         delete(instance);
 
         instances[handle] = nullptr;
-        printf("Destroyed handle %d\n", handle);
+    }
+
+    T* get(int handle){
+        T* ins = instances[handle];
     }
 };
 

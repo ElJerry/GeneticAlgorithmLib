@@ -35,11 +35,14 @@ float GAL_CalculateFitness(GA_HANDLE handle, GAL_FitnessFunction);
 
 void GAL_Crossover(GA_HANDLE handle);
 
+void GAL_PrintIndividuals(GA_HANDLE handle);
+
 void GAL_PrintIndividual(GA_HANDLE handle, int individualId);
 
 void GAL_DestroyIndividualRepresentation(GAL_Individual* individual);
 
 void GAL_SortIndividuals(GA_HANDLE handle, GAL_SortFunction sortFunction);
+
 
 #ifdef __cplusplus
 };

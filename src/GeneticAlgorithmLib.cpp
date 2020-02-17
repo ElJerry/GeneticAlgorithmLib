@@ -44,6 +44,17 @@ void GAL_Crossover(GA_HANDLE handle){
     ga->crossOver();
 }
 
+void GAL_PrintIndividuals(GA_HANDLE handle){
+    GeneticAlgorithm* ga = memManager.get(handle);
+    int populationSize = ga->getPopulationSize();
+    printf("======= Population Individuals =======\n");
+    for (int i=0 ; i < populationSize; i++){
+        ga->printIndividual(i);
+    }
+    printf("======================================\n");
+
+}
+
 void GAL_PrintIndividual(GA_HANDLE handle, int individualId){
     GeneticAlgorithm* ga = memManager.get(handle);
     ga->printIndividual(individualId);

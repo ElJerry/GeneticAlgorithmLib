@@ -20,6 +20,7 @@ public:
     void printIndividual(int id);
     Individual getIndividual(int id);
     void sortIndividuals(GAL_SortFunction sortFunction);
+    int getPopulationSize();
 };
 
 #endif //GENETICALGORITHMLIB_GENETICALGORITHM_H

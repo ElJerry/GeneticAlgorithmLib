@@ -49,6 +49,8 @@ int main() {
     GAL_SortIndividuals(h, sortFunction);
     GAL_PrintIndividual(h, 0);
 
+    GAL_PrintIndividuals(h);
+
     GAL_DestroyGeneticAlgorithm(h);
 
 }

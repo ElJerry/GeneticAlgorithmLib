@@ -54,3 +54,8 @@ void GAL_DestroyIndividualRepresentation(GAL_Individual* individual){
     delete[] individual->genes;
     delete individual;
 }
+
+void GAL_SortIndividuals(GA_HANDLE handle, GAL_SortFunction function){
+    GeneticAlgorithm* ga = memManager.get(handle);
+    ga->sortIndividuals(function);
+}

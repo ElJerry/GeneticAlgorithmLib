@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
+#include <algorithm>
 #include "GeneticAlgorithm.h"
 
 // Genetic Algorithm
@@ -35,4 +36,10 @@ void GeneticAlgorithm::printIndividual(int id) {
 
 Individual GeneticAlgorithm::getIndividual(int id) {
     return population[id];
+}
+
+void GeneticAlgorithm::sortIndividuals(GAL_SortFunction sortFunction) {
+    std::sort(population.begin(), population.end(), [sortFunction](const Individual &i1, const Individual &i2){
+        return sortFunction(i1.fitness, i2.fitness);
+    });
 }

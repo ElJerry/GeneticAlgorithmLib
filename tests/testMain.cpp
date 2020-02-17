@@ -22,6 +22,10 @@ void printIndividual(GAL_Individual* ind) {
 
 }
 
+bool sortFunction(float a, float b) {
+    return a>b;
+}
+
 int main() {
     srand(time(nullptr));
 
@@ -41,6 +45,9 @@ int main() {
 
     GAL_DestroyIndividualRepresentation(ind);
     GAL_DestroyIndividualRepresentation(ind2);
+
+    GAL_SortIndividuals(h, sortFunction);
+    GAL_PrintIndividual(h, 0);
 
     GAL_DestroyGeneticAlgorithm(h);
 

@@ -19,6 +19,7 @@ public:
     void crossOver();
     void printIndividual(int id);
     Individual getIndividual(int id);
+    void sortIndividuals(GAL_SortFunction sortFunction);
 };
 
 #endif //GENETICALGORITHMLIB_GENETICALGORITHM_H

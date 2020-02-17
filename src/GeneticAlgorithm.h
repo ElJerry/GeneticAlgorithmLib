@@ -6,7 +6,7 @@
 
 class Individual{
 public:
-    Individual(int size);
+    Individual(int size, int min, int max);
     std::vector<int> genes;
     float fitness;
 
@@ -19,15 +19,15 @@ class GeneticAlgorithm {
 private:
     std::vector<Individual> population;
     int mPopulationSize, mIndividualSize;
+    int mMinGene, mMaxGene;
 
 public:
-    GeneticAlgorithm(int population, int individualSize);
+    GeneticAlgorithm(int population, int individualSize, int minGene, int maxGene);
 
     void calculateFitness(GAL_FitnessFunction fitnessFunction);
     void crossOver();
     void printIndividual(int id);
     Individual getIndividual(int id);
 };
-
 
 #endif //GENETICALGORITHMLIB_GENETICALGORITHM_H

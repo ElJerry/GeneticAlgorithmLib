@@ -3,11 +3,11 @@
 #include "GeneticAlgorithm.h"
 
 // Individual
-Individual::Individual(int size) {
+Individual::Individual(int size, int min, int max) {
     genes.resize(size);
     //TODO: fill with random numbers?
     for (int i = 0 ; i < size ; i++) {
-        genes[i] = rand() % 2;
+        genes[i] = (rand() % ((max-min)+1)) + min;
     }
 }
 
@@ -34,15 +34,16 @@ float Individual::calculateFitness(GAL_FitnessFunction fitnessFunction) {
 }
 
 // Algorithm
-GeneticAlgorithm::GeneticAlgorithm(int population, int individualSize) {
+GeneticAlgorithm::GeneticAlgorithm(int population, int individualSize, int minGene, int maxGene) {
     mPopulationSize = population;
     mIndividualSize = individualSize;
-
+    mMaxGene = maxGene;
+    mMinGene = minGene;
     this->population.clear();
 
     //Fill population with new individuals
     while(population--) {
-        this->population.push_back(Individual(individualSize));
+        this->population.push_back(Individual(individualSize, minGene, maxGene));
     }
 }
 

@@ -27,7 +27,7 @@ void printIndividual(GAL_Individual* ind) {
 int main() {
     printf("Hello from tests\n");
 
-    GA_HANDLE h = GAL_CreateGeneticAlgorithm(10, 5);
+    GA_HANDLE h = GAL_CreateGeneticAlgorithm(10, 5, 0 , 1);
     std::cout << "Handle: " << h << std::endl;
     GAL_CalculateFitness(h, fitness);
     GAL_Crossover(h);

@@ -4,8 +4,8 @@
 
 MemoryManager<GeneticAlgorithm> memManager;
 
-GA_HANDLE GAL_CreateGeneticAlgorithm(int populationSize, int individualSize){
-    int handle = memManager.create(populationSize, individualSize);
+GA_HANDLE GAL_CreateGeneticAlgorithm(int populationSize, int individualSize, int minGene, int maxGene){
+    int handle = memManager.create(populationSize, individualSize, minGene, maxGene);
     return handle;
 }
 

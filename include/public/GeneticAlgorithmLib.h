@@ -19,7 +19,7 @@ typedef unsigned int GA_HANDLE;
 
 typedef float(*GAL_FitnessFunction)(int genes[], int size);
 
-GA_HANDLE GAL_CreateGeneticAlgorithm(int populationSize, int individualSize);
+GA_HANDLE GAL_CreateGeneticAlgorithm(int populationSize, int individualSize, int minGene, int maxGene);
 
 void GAL_DestroyGeneticAlgorithm(GA_HANDLE handle);
 
@@ -36,6 +36,8 @@ void GAL_Crossover(GA_HANDLE handle);
 void GAL_PrintIndividual(GA_HANDLE handle, int individualId);
 
 void GAL_DestroyIndividualRepresentation(GAL_Individual* individual);
+
+//TODO: Add a function to sort the individuals based on a user defined function
 
 #ifdef __cplusplus
 };

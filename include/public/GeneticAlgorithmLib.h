@@ -1,9 +1,19 @@
+//TODO: Document header
 #ifndef GENETICALGORITHMLIB_H
 #define GENETICALGORITHMLIB_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+typedef struct{
+    // Array of genes
+    int *genes;
+    // Gene count
+    int size;
+    // Individual fitness
+    float fitness;
+} GAL_Individual;
 
 typedef unsigned int GA_HANDLE;
 
@@ -13,13 +23,19 @@ GA_HANDLE GAL_CreateGeneticAlgorithm(int populationSize, int individualSize);
 
 void GAL_DestroyGeneticAlgorithm(GA_HANDLE handle);
 
-const char* GAL_GetIndividual(GA_HANDLE handle, int individualId);
+/*
+ * Returns a representation of and individual.
+ * This should be deleted using GAL_DestroyIndividualRepresentation
+ */
+GAL_Individual* GAL_GetIndividual(GA_HANDLE handle, int individualId);
 
 float GAL_CalculateFitness(GA_HANDLE handle, GAL_FitnessFunction);
 
 void GAL_Crossover(GA_HANDLE handle);
 
 void GAL_PrintIndividual(GA_HANDLE handle, int individualId);
+
+void GAL_DestroyIndividualRepresentation(GAL_Individual* individual);
 
 #ifdef __cplusplus
 };

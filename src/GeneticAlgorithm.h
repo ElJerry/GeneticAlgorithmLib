@@ -10,22 +10,23 @@ public:
     std::vector<int> genes;
     float fitness;
 
-    void printIndividual();
+    void printIndividual(int id);
     float calculateFitness(GAL_FitnessFunction fitnessFunction);
+
 };
 
 class GeneticAlgorithm {
 private:
     std::vector<Individual> population;
-    int populationSize, individualSize;
-public:
+    int mPopulationSize, mIndividualSize;
 
+public:
     GeneticAlgorithm(int population, int individualSize);
 
     void calculateFitness(GAL_FitnessFunction fitnessFunction);
     void crossOver();
     void printIndividual(int id);
-
+    Individual getIndividual(int id);
 };
 
 

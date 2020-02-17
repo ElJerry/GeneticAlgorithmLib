@@ -1,17 +1,25 @@
 #include <cstdio>
+#include <cstdlib>
 #include "GeneticAlgorithm.h"
 
 // Individual
 Individual::Individual(int size) {
     genes.resize(size);
     //TODO: fill with random numbers?
+    for (int i = 0 ; i < size ; i++) {
+        genes[i] = rand() % 2;
+    }
 }
 
-void Individual::printIndividual() {
+void Individual::printIndividual(int id) {
+    printf("=== Individual %d ===\n", id);
+    printf("Genes: ");
     for (auto i = genes.begin(); i != genes.end(); i++) {
         printf ("%d",*i);
     }
     printf("\n");
+
+    printf("Fitness: %.2f\n", fitness);
 }
 
 float Individual::calculateFitness(GAL_FitnessFunction fitnessFunction) {
@@ -21,21 +29,25 @@ float Individual::calculateFitness(GAL_FitnessFunction fitnessFunction) {
         genes_int[i] = genes[i];
     }
 
-    return fitnessFunction(genes_int, genes.size());
+    fitness = fitnessFunction(genes_int, genes.size());
+    return fitness;
 }
 
 // Algorithm
 GeneticAlgorithm::GeneticAlgorithm(int population, int individualSize) {
-    this->population.assign(population, individualSize);
-    populationSize = population;
-    individualSize = individualSize;
-    //TODO: calculate fitness;
+    mPopulationSize = population;
+    mIndividualSize = individualSize;
+
+    this->population.clear();
+
+    //Fill population with new individuals
+    while(population--) {
+        this->population.push_back(Individual(individualSize));
+    }
 }
 
 void GeneticAlgorithm::calculateFitness(GAL_FitnessFunction func) {
-    //TODO: caclulate fitness
-    printf("Calculating fitness....\n");
-    for (int i=0 ; i<populationSize ; i++) {
+    for (int i=0 ; i < mPopulationSize ; i++) {
         population[i].calculateFitness(func);
     }
 }
@@ -48,5 +60,9 @@ void GeneticAlgorithm::crossOver() {
 
 void GeneticAlgorithm::printIndividual(int id) {
     //TODO: Check provided id is in range
-    population[id].printIndividual();
+    population[id].printIndividual(id);
+}
+
+Individual GeneticAlgorithm::getIndividual(int id) {
+    return population[id];
 }

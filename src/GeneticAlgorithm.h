@@ -4,16 +4,7 @@
 #include <vector>
 #include <public/GeneticAlgorithmLib.h>
 
-class Individual{
-public:
-    Individual(int size, int min, int max);
-    std::vector<int> genes;
-    float fitness;
-
-    void printIndividual(int id);
-    float calculateFitness(GAL_FitnessFunction fitnessFunction);
-
-};
+#include "Individual.h"
 
 class GeneticAlgorithm {
 private:

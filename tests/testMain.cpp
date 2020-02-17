@@ -5,18 +5,16 @@
 using namespace std;
 
 float fitness(int genes[], int size){
-//    cout << "calculating fittness!!" << endl;
     float res = 0;
     for(int i = 0 ; i < size; i++){
-        res++;
-//        printf("%d ", genes[i]);
+        res += genes[i];
     }
-//    printf("\n");
     return res;
 }
 
 void printIndividual(GAL_Individual* ind) {
     cout << "Printing genes returned by GAL_GetIndividual" << endl;
+
     for(int i=0 ; i < ind->size ; i++) {
         cout << ind->genes[i] << " ";
     }
@@ -25,7 +23,7 @@ void printIndividual(GAL_Individual* ind) {
 }
 
 int main() {
-    printf("Hello from tests\n");
+    srand(time(nullptr));
 
     GA_HANDLE h = GAL_CreateGeneticAlgorithm(10, 5, 0 , 1);
     std::cout << "Handle: " << h << std::endl;

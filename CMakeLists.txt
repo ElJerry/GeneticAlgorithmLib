@@ -7,8 +7,8 @@ include_directories(include)
 
 add_library(GeneticAlgorithmLib
         src/GeneticAlgorithmLib.cpp
-        src/MemoryManager.cpp
-        src/GeneticAlgorithm.cpp)
+        src/GeneticAlgorithm.cpp
+        src/Individual.cpp)
 
 
 add_subdirectory(tests)

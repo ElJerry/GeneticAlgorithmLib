@@ -29,7 +29,7 @@ bool sortFunction(float a, float b) {
 int main() {
     srand(time(nullptr));
 
-    GA_HANDLE h = GAL_CreateGeneticAlgorithm(10, 5, 0 , 1);
+    GA_HANDLE h = GAL_CreateGeneticAlgorithm(10, 10, 0 , 1);
     std::cout << "Handle: " << h << std::endl;
     GAL_CalculateFitness(h, fitness);
     GAL_Crossover(h);
@@ -45,11 +45,19 @@ int main() {
 
     GAL_DestroyIndividualRepresentation(ind);
     GAL_DestroyIndividualRepresentation(ind2);
+    GAL_PrintIndividuals(h);
 
     GAL_SortIndividuals(h, sortFunction);
     GAL_PrintIndividual(h, 0);
 
-    GAL_PrintIndividuals(h);
+    int x = 3;
+    while(x--){
+        GAL_Crossover(h);
+        GAL_CalculateFitness(h, fitness);
+        GAL_SortIndividuals(h, sortFunction);
+        GAL_PrintIndividual(h, 0);
+    }
+
 
     GAL_DestroyGeneticAlgorithm(h);
 

@@ -3,12 +3,18 @@
 #include "Individual.h"
 
 // Individual
+Individual::Individual() {
+    fitness = 0;
+}
+
 Individual::Individual(int size, int min, int max) {
     genes.resize(size);
 
     for (int i = 0 ; i < size ; i++) {
         genes[i] = (rand() % ((max-min)+1)) + min;
     }
+
+    fitness = 0;
 }
 
 void Individual::printIndividual(int id) {

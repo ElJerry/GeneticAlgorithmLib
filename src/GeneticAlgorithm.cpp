@@ -17,7 +17,7 @@ GeneticAlgorithm::GeneticAlgorithm(int population, int individualSize, int minGe
 }
 
 void GeneticAlgorithm::calculateFitness(GAL_FitnessFunction func) {
-    for (int i=0 ; i < mPopulationSize ; i++) {
+    for (int i=0 ; i < population.size() ; i++) {
         population[i].calculateFitness(func);
     }
 }
@@ -25,7 +25,24 @@ void GeneticAlgorithm::calculateFitness(GAL_FitnessFunction func) {
 
 void GeneticAlgorithm::crossOver() {
     //TODO: Crossover
-    printf("Crossover....\n");
+    int cnt = 1;
+    for (int i=0 ; i < mPopulationSize ; i = i + 2) {
+        if (i+1 >= mPopulationSize)
+            continue;
+
+        Individual newIndividual;
+
+        for(int j=0 ; j< mIndividualSize ; j++){
+            if(rand()%2){
+                newIndividual.genes.push_back(population[i].genes[j]);
+            }
+            else{
+                newIndividual.genes.push_back(population[i+1].genes[j]);
+            }
+        }
+
+        population.push_back(newIndividual);
+    }
 }
 
 void GeneticAlgorithm::printIndividual(int id) {

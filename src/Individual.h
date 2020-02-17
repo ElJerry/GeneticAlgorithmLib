@@ -7,6 +7,7 @@
 class Individual{
 public:
     Individual(int size, int min, int max);
+    Individual();
     std::vector<int> genes;
     float fitness;
 

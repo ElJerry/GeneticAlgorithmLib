@@ -22,7 +22,7 @@ void printIndividual(GAL_Individual ind) {
 
 }
 
-bool sortFunction(float a, float b) {
+bool sortFunction(const float a, const float b) {
     return a>b;
 }
 

@@ -16,6 +16,13 @@ GeneticAlgorithm::GeneticAlgorithm(int population, int individualSize, int minGe
     }
 }
 
+bool GeneticAlgorithm::isInRage(int id) {
+    if (id >= mPopulationSize)
+        return false;
+
+    return true;
+}
+
 void GeneticAlgorithm::calculateFitness(GAL_FitnessFunction func) {
     for (int i=0 ; i < population.size() ; i++) {
         population[i].calculateFitness(func);
@@ -44,7 +51,6 @@ void GeneticAlgorithm::crossOver() {
 }
 
 void GeneticAlgorithm::printIndividual(int id) {
-    //TODO: Check provided id is in range
     population[id].printIndividual(id);
 }
 

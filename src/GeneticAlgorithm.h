@@ -13,6 +13,7 @@ private:
     int mMinGene, mMaxGene;
 
 public:
+    bool isInRage(int id);
     GeneticAlgorithm(int population, int individualSize, int minGene, int maxGene);
 
     void calculateFitness(GAL_FitnessFunction fitnessFunction);

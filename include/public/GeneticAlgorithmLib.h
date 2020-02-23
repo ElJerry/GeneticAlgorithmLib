@@ -19,7 +19,7 @@ typedef unsigned int GA_HANDLE;
 
 typedef float(*GAL_FitnessFunction)(const int genes[], const int size);
 
-typedef bool(*GAL_SortFunction)(float individualA, float individualB);
+typedef bool(*GAL_SortFunction)(const float individualA, const float individualB);
 
 GA_HANDLE GAL_CreateGeneticAlgorithm(int populationSize, int individualSize, int minGene, int maxGene);
 

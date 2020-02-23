@@ -15,6 +15,11 @@ void GAL_DestroyGeneticAlgorithm(GA_HANDLE handle){
 
 GAL_Individual GAL_GetIndividual(GA_HANDLE handle, int individualId){
     GeneticAlgorithm* ga = memManager.get(handle);
+
+    if (!ga->isInRage(individualId)){
+        return GAL_Individual{};
+    }
+
     Individual ind = ga->getIndividual(individualId);
 
     // Transform Individual to GAL_Individual
@@ -51,6 +56,11 @@ void GAL_PrintIndividuals(GA_HANDLE handle){
 
 void GAL_PrintIndividual(GA_HANDLE handle, int individualId){
     GeneticAlgorithm* ga = memManager.get(handle);
+
+    if (!ga->isInRage(individualId)){
+        return;
+    }
+
     ga->printIndividual(individualId);
 }
 

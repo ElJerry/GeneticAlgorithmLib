@@ -4,7 +4,7 @@
 
 using namespace std;
 
-float fitness(int genes[], int size){
+float fitness(const int genes[], const int size){
     float res = 0;
     for(int i = 0 ; i < size; i++){
         res += genes[i];
@@ -12,13 +12,13 @@ float fitness(int genes[], int size){
     return res;
 }
 
-void printIndividual(GAL_Individual* ind) {
+void printIndividual(GAL_Individual ind) {
     cout << "Printing genes returned by GAL_GetIndividual" << endl;
 
-    for(int i=0 ; i < ind->size ; i++) {
-        cout << ind->genes[i] << " ";
+    for(int i=0 ; i < ind.size ; i++) {
+        cout << ind.genes[i] << " ";
     }
-    cout << "==== " << ind->fitness<<  endl;
+    cout << "==== " << ind.fitness<<  endl;
 
 }
 
@@ -43,14 +43,12 @@ int main() {
     printIndividual(ind);
     printIndividual(ind2);
 
-    GAL_DestroyIndividualRepresentation(ind);
-    GAL_DestroyIndividualRepresentation(ind2);
     GAL_PrintIndividuals(h);
 
     GAL_SortIndividuals(h, sortFunction);
     GAL_PrintIndividual(h, 0);
 
-    int x = 3;
+    int x = 10;
     while(x--){
         GAL_Crossover(h);
         GAL_CalculateFitness(h, fitness);
@@ -60,5 +58,4 @@ int main() {
 
 
     GAL_DestroyGeneticAlgorithm(h);
-
 }

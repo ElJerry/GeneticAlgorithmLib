@@ -13,7 +13,7 @@ void GAL_DestroyGeneticAlgorithm(GA_HANDLE handle){
     memManager.destroy(handle);
 }
 
-GAL_Individual* GAL_GetIndividual(GA_HANDLE handle, int individualId){
+GAL_Individual GAL_GetIndividual(GA_HANDLE handle, int individualId){
     GeneticAlgorithm* ga = memManager.get(handle);
     Individual ind = ga->getIndividual(individualId);
 
@@ -21,15 +21,9 @@ GAL_Individual* GAL_GetIndividual(GA_HANDLE handle, int individualId){
     int size = ind.genes.size();
 
     //Memory should be deleted using GAL_DestroyIndividualRepresentation
-    int *genes = new int[size];
+    int *genes = ind.genes.data();
 
-    for(int i=0 ; i < size ; i++){
-        genes[i] = ind.genes[i];
-        std::cout << genes[i] << "+";
-    }
-    printf("\n");
-
-    auto galIndividual = new GAL_Individual{genes, size, ind.fitness};
+    auto galIndividual = GAL_Individual{genes, size, ind.fitness};
 
     return galIndividual;
 }
@@ -58,12 +52,6 @@ void GAL_PrintIndividuals(GA_HANDLE handle){
 void GAL_PrintIndividual(GA_HANDLE handle, int individualId){
     GeneticAlgorithm* ga = memManager.get(handle);
     ga->printIndividual(individualId);
-}
-
-void GAL_DestroyIndividualRepresentation(GAL_Individual* individual){
-    //TODO: check if this really deletes all array memory
-    delete[] individual->genes;
-    delete individual;
 }
 
 void GAL_SortIndividuals(GA_HANDLE handle, GAL_SortFunction function){

@@ -24,8 +24,6 @@ void GeneticAlgorithm::calculateFitness(GAL_FitnessFunction func) {
 
 
 void GeneticAlgorithm::crossOver() {
-    //TODO: Crossover
-    int cnt = 1;
     for (int i=0 ; i < mPopulationSize ; i = i + 2) {
         if (i+1 >= mPopulationSize)
             continue;

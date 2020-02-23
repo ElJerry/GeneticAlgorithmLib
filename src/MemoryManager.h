@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdio>
 #include <iostream>
+#include <queue>
 
 #define MAX_MEM_SIZE 500
 
@@ -11,20 +12,25 @@ template <class T>
 class MemoryManager {
 private:
     std::vector<T*> instances;
+    std::queue<int> nextSlot;
 public:
     MemoryManager() {
         instances.assign(MAX_MEM_SIZE, nullptr);
+
+        // fill nextSlot with empty positions
+        for (int i = 0; i < MAX_MEM_SIZE ; i++) {
+            nextSlot.push(i);
+        }
     };
 
     template <class ...ARGS>
     int create(ARGS ...args) {
-        static int nextPosition = 0;
 
-        int handle = nextPosition;
+        if (nextSlot.empty()) {
+            return -1;
+        }
 
-        // increment position
-        // TODO: avoid collisions with already used instance
-        nextPosition = (nextPosition + 1) % MAX_MEM_SIZE;
+        int handle = nextSlot.front(); nextSlot.pop();
 
         if (instances[handle] == nullptr) {
             auto instance = new T(args...);
@@ -40,6 +46,8 @@ public:
         delete(instance);
 
         instances[handle] = nullptr;
+        // add this empty slot to nextSlot queue
+        nextSlot.push(handle);
     }
 
     T* get(int handle){

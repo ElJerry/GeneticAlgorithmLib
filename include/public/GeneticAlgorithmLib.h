@@ -44,4 +44,5 @@ void GAL_SortIndividuals(GA_HANDLE handle, GAL_SortFunction sortFunction);
 #ifdef __cplusplus
 };
 #endif
+
 #endif //GENETICALGORITHMLIB_H

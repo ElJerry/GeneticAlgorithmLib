@@ -14,7 +14,7 @@ void GAL_DestroyGeneticAlgorithm(GA_HANDLE handle){
 }
 
 GAL_Individual GAL_GetIndividual(GA_HANDLE handle, int individualId){
-    GeneticAlgorithm* ga = memManager.get(handle);
+    auto ga = memManager.get(handle);
 
     if (!ga->isInRage(individualId)){
         return GAL_Individual{};
@@ -34,17 +34,17 @@ GAL_Individual GAL_GetIndividual(GA_HANDLE handle, int individualId){
 }
 
 float GAL_CalculateFitness(GA_HANDLE handle, GAL_FitnessFunction fitnessFunction){
-    GeneticAlgorithm* ga = memManager.get(handle);
+    auto ga = memManager.get(handle);
     ga->calculateFitness(fitnessFunction);
 }
 
 void GAL_Crossover(GA_HANDLE handle){
-    GeneticAlgorithm* ga = memManager.get(handle);
+    auto ga = memManager.get(handle);
     ga->crossOver();
 }
 
 void GAL_PrintIndividuals(GA_HANDLE handle){
-    GeneticAlgorithm* ga = memManager.get(handle);
+    auto ga = memManager.get(handle);
     int populationSize = ga->getPopulationSize();
     printf("======= Population Individuals =======\n");
     for (int i=0 ; i < populationSize; i++){
@@ -55,7 +55,7 @@ void GAL_PrintIndividuals(GA_HANDLE handle){
 }
 
 void GAL_PrintIndividual(GA_HANDLE handle, int individualId){
-    GeneticAlgorithm* ga = memManager.get(handle);
+    auto ga = memManager.get(handle);
 
     if (!ga->isInRage(individualId)){
         return;
@@ -65,6 +65,6 @@ void GAL_PrintIndividual(GA_HANDLE handle, int individualId){
 }
 
 void GAL_SortIndividuals(GA_HANDLE handle, GAL_SortFunction function){
-    GeneticAlgorithm* ga = memManager.get(handle);
+    auto ga = memManager.get(handle);
     ga->sortIndividuals(function);
 }

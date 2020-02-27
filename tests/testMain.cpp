@@ -1,3 +1,4 @@
+//TODO: Add tests using catch2
 #include <cstdio>
 #include <GeneticAlgorithmLib.h>
 #include <iostream>
@@ -48,7 +49,7 @@ int main() {
     GAL_SortIndividuals(h, sortFunction);
     GAL_PrintIndividual(h, 0);
 
-    int x = 10;
+    int x = 100;
     while(x--){
         GAL_Crossover(h);
         GAL_CalculateFitness(h, fitness);

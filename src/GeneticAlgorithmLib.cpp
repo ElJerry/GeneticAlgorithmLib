@@ -4,16 +4,16 @@
 
 MemoryManager<GeneticAlgorithm> memManager;
 
-GA_HANDLE GAL_CreateGeneticAlgorithm(int populationSize, int individualSize, int minGene, int maxGene){
+GAL_HANDLE GAL_CreateGeneticAlgorithm(int populationSize, int individualSize, int minGene, int maxGene){
     int handle = memManager.create(populationSize, individualSize, minGene, maxGene);
     return handle;
 }
 
-void GAL_DestroyGeneticAlgorithm(GA_HANDLE handle){
+void GAL_DestroyGeneticAlgorithm(GAL_HANDLE handle){
     memManager.destroy(handle);
 }
 
-GAL_Individual GAL_GetIndividual(GA_HANDLE handle, int individualId){
+GAL_Individual GAL_GetIndividual(GAL_HANDLE handle, int individualId){
     auto ga = memManager.get(handle);
 
     if (!ga->isInRage(individualId)){
@@ -33,17 +33,17 @@ GAL_Individual GAL_GetIndividual(GA_HANDLE handle, int individualId){
     return galIndividual;
 }
 
-float GAL_CalculateFitness(GA_HANDLE handle, GAL_FitnessFunction fitnessFunction){
+float GAL_CalculateFitness(GAL_HANDLE handle, GAL_FitnessFunction fitnessFunction){
     auto ga = memManager.get(handle);
     ga->calculateFitness(fitnessFunction);
 }
 
-void GAL_Crossover(GA_HANDLE handle){
+void GAL_Crossover(GAL_HANDLE handle){
     auto ga = memManager.get(handle);
     ga->crossOver();
 }
 
-void GAL_PrintIndividuals(GA_HANDLE handle){
+void GAL_PrintIndividuals(GAL_HANDLE handle){
     auto ga = memManager.get(handle);
     int populationSize = ga->getPopulationSize();
     printf("======= Population Individuals =======\n");
@@ -54,7 +54,7 @@ void GAL_PrintIndividuals(GA_HANDLE handle){
 
 }
 
-void GAL_PrintIndividual(GA_HANDLE handle, int individualId){
+void GAL_PrintIndividual(GAL_HANDLE handle, int individualId){
     auto ga = memManager.get(handle);
 
     if (!ga->isInRage(individualId)){
@@ -64,7 +64,7 @@ void GAL_PrintIndividual(GA_HANDLE handle, int individualId){
     ga->printIndividual(individualId);
 }
 
-void GAL_SortIndividuals(GA_HANDLE handle, GAL_SortFunction function){
+void GAL_SortIndividuals(GAL_HANDLE handle, GAL_SortFunction function){
     auto ga = memManager.get(handle);
     ga->sortIndividuals(function);
 }

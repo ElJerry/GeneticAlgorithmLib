@@ -15,30 +15,30 @@ typedef struct{
     const float fitness;
 } GAL_Individual;
 
-typedef unsigned int GA_HANDLE;
+typedef unsigned int GAL_HANDLE;
 
 typedef float(*GAL_FitnessFunction)(const int genes[], const int size);
 
 typedef bool(*GAL_SortFunction)(const float individualA, const float individualB);
 
-GA_HANDLE GAL_CreateGeneticAlgorithm(int populationSize, int individualSize, int minGene, int maxGene);
+GAL_HANDLE GAL_CreateGeneticAlgorithm(int populationSize, int individualSize, int minGene, int maxGene);
 
-void GAL_DestroyGeneticAlgorithm(GA_HANDLE handle);
+void GAL_DestroyGeneticAlgorithm(GAL_HANDLE handle);
 
 /*
  * Returns a representation of and individual.
  */
-GAL_Individual GAL_GetIndividual(GA_HANDLE handle, int individualId);
+GAL_Individual GAL_GetIndividual(GAL_HANDLE handle, int individualId);
 
-float GAL_CalculateFitness(GA_HANDLE handle, GAL_FitnessFunction);
+float GAL_CalculateFitness(GAL_HANDLE handle, GAL_FitnessFunction);
 
-void GAL_Crossover(GA_HANDLE handle);
+void GAL_Crossover(GAL_HANDLE handle);
 
-void GAL_PrintIndividuals(GA_HANDLE handle);
+void GAL_PrintIndividuals(GAL_HANDLE handle);
 
-void GAL_PrintIndividual(GA_HANDLE handle, int individualId);
+void GAL_PrintIndividual(GAL_HANDLE handle, int individualId);
 
-void GAL_SortIndividuals(GA_HANDLE handle, GAL_SortFunction sortFunction);
+void GAL_SortIndividuals(GAL_HANDLE handle, GAL_SortFunction sortFunction);
 
 
 #ifdef __cplusplus

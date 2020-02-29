@@ -11,3 +11,4 @@ add_library(GeneticAlgorithmLib
         src/Individual.cpp)
 
 add_subdirectory(tests)
+add_subdirectory(examples)

@@ -34,6 +34,7 @@ void GeneticAlgorithm::calculateFitness(GAL_FitnessFunction func) {
 
 
 void GeneticAlgorithm::crossOver() {
+    std::vector<Individual> newIndividuals;
     for (int i=0 ; i < mPopulationSize ; i = i + 2) {
         if (i+1 >= mPopulationSize)
             continue;
@@ -61,7 +62,14 @@ void GeneticAlgorithm::crossOver() {
             }
         }
 
-        population.push_back(newIndividual);
+        newIndividuals.push_back(newIndividual);
+    }
+
+    // Replace last n/2 individuals with the new ones
+    int firstIndex = population.size() / 2;
+    int newIndex = 0;
+    for (int i = firstIndex; i < population.size(); i++) {
+        population[i] = newIndividuals[newIndex++];
     }
 }
 

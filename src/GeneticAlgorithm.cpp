@@ -1,6 +1,9 @@
 #include <cstdio>
 #include <algorithm>
+#include <iostream>
 #include "GeneticAlgorithm.h"
+
+#define MUTATION_PROBABILITY 5
 
 // Genetic Algorithm
 GeneticAlgorithm::GeneticAlgorithm(int population, int individualSize, int minGene, int maxGene) {
@@ -37,12 +40,24 @@ void GeneticAlgorithm::crossOver() {
 
         Individual newIndividual;
 
-        for(int j=0 ; j< mIndividualSize ; j++){
-            if(rand()%2){
+        for(int j=0 ; j< mIndividualSize ; j++) {
+            if(rand() % 2) {
                 newIndividual.genes.push_back(population[i].genes[j]);
             }
-            else{
+            else {
                 newIndividual.genes.push_back(population[i+1].genes[j]);
+            }
+
+            // Check for mutation
+            int mutationAux = rand() % 101;
+            if (mutationAux <= MUTATION_PROBABILITY) {
+                //TODO: Right now mutation only works for 0 or 1 values
+                if (newIndividual.genes[j] == 0) {
+                    newIndividual.genes[j] = 1;
+                }
+                else {
+                    newIndividual.genes[j] = 0;
+                }
             }
         }
 

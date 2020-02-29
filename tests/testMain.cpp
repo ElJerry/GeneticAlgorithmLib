@@ -5,7 +5,7 @@
 
 using namespace std;
 
-float fitness(const int genes[], const int size){
+float fitness(void* context, const int genes[], const int size){
     float res = 0;
     for(int i = 0 ; i < size; i++){
         res += genes[i];
@@ -23,16 +23,16 @@ void printIndividual(GAL_Individual ind) {
 
 }
 
-bool sortFunction(const float a, const float b) {
+bool sortFunction(void* context, const float a, const float b) {
     return a>b;
 }
 
 int main() {
     srand(time(nullptr));
 
-    GA_HANDLE h = GAL_CreateGeneticAlgorithm(10, 10, 0 , 1);
+    GAL_HANDLE h = GAL_CreateGeneticAlgorithm(10, 10, 0 , 1);
     std::cout << "Handle: " << h << std::endl;
-    GAL_CalculateFitness(h, fitness);
+    GAL_CalculateFitness(h, fitness, nullptr);
     GAL_Crossover(h);
     GAL_PrintIndividual(h, 0);
     GAL_PrintIndividual(h, 1);
@@ -46,14 +46,14 @@ int main() {
 
     GAL_PrintIndividuals(h);
 
-    GAL_SortIndividuals(h, sortFunction);
+    GAL_SortIndividuals(h, sortFunction, nullptr);
     GAL_PrintIndividual(h, 0);
 
     int x = 100;
     while(x--){
         GAL_Crossover(h);
-        GAL_CalculateFitness(h, fitness);
-        GAL_SortIndividuals(h, sortFunction);
+        GAL_CalculateFitness(h, fitness, nullptr);
+        GAL_SortIndividuals(h, sortFunction, nullptr);
         GAL_PrintIndividual(h, 0);
     }
 

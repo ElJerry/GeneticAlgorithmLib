@@ -33,9 +33,9 @@ GAL_Individual GAL_GetIndividual(GAL_HANDLE handle, int individualId){
     return galIndividual;
 }
 
-float GAL_CalculateFitness(GAL_HANDLE handle, GAL_FitnessFunction fitnessFunction){
+float GAL_CalculateFitness(GAL_HANDLE handle, GAL_FitnessFunction fitnessFunction, void* context){
     auto ga = memManager.get(handle);
-    ga->calculateFitness(fitnessFunction);
+    ga->calculateFitness(fitnessFunction, context);
 }
 
 void GAL_Crossover(GAL_HANDLE handle){
@@ -64,7 +64,7 @@ void GAL_PrintIndividual(GAL_HANDLE handle, int individualId){
     ga->printIndividual(individualId);
 }
 
-void GAL_SortIndividuals(GAL_HANDLE handle, GAL_SortFunction function){
+void GAL_SortIndividuals(GAL_HANDLE handle, GAL_SortFunction function, void* context){
     auto ga = memManager.get(handle);
-    ga->sortIndividuals(function);
+    ga->sortIndividuals(function, context);
 }

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <functional>
+
 #include "OneMaxProblem.h"
 
 std::string OneMaxProblem::getProblemName() {
@@ -24,7 +26,8 @@ void OneMaxProblem::printIndividuals() {
     GAL_PrintIndividuals(handle_);
 }
 
-float OneMaxProblem::fitnessFunction(const int genes[], const int size) {
+float OneMaxProblem::fitnessFunction(void* context, const int genes[], const int size) {
+
     float fitness = 0;
     for (int i = 0; i < size ; i++) {
         fitness += genes[i];
@@ -33,19 +36,20 @@ float OneMaxProblem::fitnessFunction(const int genes[], const int size) {
     return fitness;
 }
 
-bool OneMaxProblem::sortFunction(float individualA, float individualB) {
+bool OneMaxProblem::sortFunction(void* context, float individualA, float individualB) {
     return individualA > individualB;
 }
 
 void OneMaxProblem::iterate() {
     GAL_Crossover(handle_);
-    GAL_CalculateFitness(handle_, fitnessFunction);
-    GAL_SortIndividuals(handle_, sortFunction);
+
+    GAL_CalculateFitness(handle_, fitnessFunction, this);
+    GAL_SortIndividuals(handle_, sortFunction, this);
 }
 
 void OneMaxProblem::initializeProblem() {
     handle_ = GAL_CreateGeneticAlgorithm(100, 60, 0, 1);
-    GAL_CalculateFitness(handle_, OneMaxProblem::fitnessFunction);
-    GAL_SortIndividuals(handle_, OneMaxProblem::sortFunction);
+    GAL_CalculateFitness(handle_, OneMaxProblem::fitnessFunction, this);
+    GAL_SortIndividuals(handle_, OneMaxProblem::sortFunction, this);
     printIndividuals();
 }

@@ -26,9 +26,9 @@ bool GeneticAlgorithm::isInRage(int id) {
     return true;
 }
 
-void GeneticAlgorithm::calculateFitness(GAL_FitnessFunction func) {
+void GeneticAlgorithm::calculateFitness(GAL_FitnessFunction func, void* context) {
     for (int i=0 ; i < population.size() ; i++) {
-        population[i].calculateFitness(func);
+        population[i].calculateFitness(func, context);
     }
 }
 
@@ -81,9 +81,9 @@ Individual GeneticAlgorithm::getIndividual(int id) {
     return population[id];
 }
 
-void GeneticAlgorithm::sortIndividuals(GAL_SortFunction sortFunction) {
-    std::sort(population.begin(), population.end(), [sortFunction](const Individual &i1, const Individual &i2){
-        return sortFunction(i1.fitness, i2.fitness);
+void GeneticAlgorithm::sortIndividuals(GAL_SortFunction sortFunction, void* context) {
+    std::sort(population.begin(), population.end(), [=](const Individual &i1, const Individual &i2){
+        return sortFunction(context, i1.fitness, i2.fitness);
     });
 }
 

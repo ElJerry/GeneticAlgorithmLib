@@ -12,7 +12,7 @@ public:
     float fitness;
 
     void printIndividual(int id);
-    float calculateFitness(GAL_FitnessFunction fitnessFunction);
+    float calculateFitness(GAL_FitnessFunction fitnessFunction, void* context);
 
 };
 

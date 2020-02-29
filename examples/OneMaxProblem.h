@@ -13,8 +13,8 @@ private:
     void iterate();
     void initializeProblem();
 
-    static float fitnessFunction(const int genes[], int size);
-    static bool sortFunction(float individualA, float individualB);
+    static float fitnessFunction(void* context, const int genes[], int size);
+    static bool sortFunction(void* context, float individualA, float individualB);
 
 
 public:

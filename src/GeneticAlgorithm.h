@@ -16,11 +16,11 @@ public:
     bool isInRage(int id);
     GeneticAlgorithm(int population, int individualSize, int minGene, int maxGene);
 
-    void calculateFitness(GAL_FitnessFunction fitnessFunction);
+    void calculateFitness(GAL_FitnessFunction fitnessFunction, void* context);
     void crossOver();
     void printIndividual(int id);
     Individual getIndividual(int id);
-    void sortIndividuals(GAL_SortFunction sortFunction);
+    void sortIndividuals(GAL_SortFunction sortFunction, void* context);
     int getPopulationSize();
 };
 

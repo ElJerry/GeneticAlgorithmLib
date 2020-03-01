@@ -3,6 +3,10 @@
 #include <GeneticAlgorithmLib.h>
 #include <iostream>
 
+#ifdef _WIN32
+#include <time.h>
+#endif
+
 using namespace std;
 
 float fitness(void* context, const int genes[], const int size){

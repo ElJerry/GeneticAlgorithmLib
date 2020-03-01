@@ -33,7 +33,7 @@ GAL_Individual GAL_GetIndividual(GAL_HANDLE handle, int individualId){
     return galIndividual;
 }
 
-float GAL_CalculateFitness(GAL_HANDLE handle, GAL_FitnessFunction fitnessFunction, void* context){
+void GAL_CalculateFitness(GAL_HANDLE handle, GAL_FitnessFunction fitnessFunction, void* context){
     auto ga = memManager.get(handle);
     ga->calculateFitness(fitnessFunction, context);
 }

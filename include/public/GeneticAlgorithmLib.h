@@ -30,7 +30,7 @@ void GAL_DestroyGeneticAlgorithm(GAL_HANDLE handle);
  */
 GAL_Individual GAL_GetIndividual(GAL_HANDLE handle, int individualId);
 
-float GAL_CalculateFitness(GAL_HANDLE handle, GAL_FitnessFunction, void* context);
+void GAL_CalculateFitness(GAL_HANDLE handle, GAL_FitnessFunction, void* context);
 
 void GAL_Crossover(GAL_HANDLE handle);
 

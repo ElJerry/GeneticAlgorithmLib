@@ -19,7 +19,7 @@ public:
     void calculateFitness(GAL_FitnessFunction fitnessFunction, void* context);
     void crossOver();
     void printIndividual(int id);
-    Individual getIndividual(int id);
+    Individual* getIndividual(int id);
     void sortIndividuals(GAL_SortFunction sortFunction, void* context);
     int getPopulationSize();
 };

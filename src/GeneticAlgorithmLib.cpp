@@ -20,15 +20,15 @@ GAL_Individual GAL_GetIndividual(GAL_HANDLE handle, int individualId){
         return GAL_Individual{};
     }
 
-    Individual ind = ga->getIndividual(individualId);
+    Individual* ind = ga->getIndividual(individualId);
 
     // Transform Individual to GAL_Individual
-    int size = ind.genes.size();
+    int size = ind->genes.size();
 
     //Memory should be deleted using GAL_DestroyIndividualRepresentation
-    int *genes = ind.genes.data();
+    int *genes = ind->genes.data();
 
-    auto galIndividual = GAL_Individual{genes, size, ind.fitness};
+    auto galIndividual = GAL_Individual{genes, size, ind->fitness};
 
     return galIndividual;
 }

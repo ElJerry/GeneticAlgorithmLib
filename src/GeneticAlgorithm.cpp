@@ -77,8 +77,8 @@ void GeneticAlgorithm::printIndividual(int id) {
     population[id].printIndividual(id);
 }
 
-Individual GeneticAlgorithm::getIndividual(int id) {
-    return population[id];
+Individual* GeneticAlgorithm::getIndividual(int id) {
+    return &population[id];
 }
 
 void GeneticAlgorithm::sortIndividuals(GAL_SortFunction sortFunction, void* context) {

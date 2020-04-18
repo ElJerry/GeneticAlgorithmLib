@@ -48,6 +48,10 @@ void OneMaxProblem::iterate() {
 }
 
 void OneMaxProblem::initializeProblem() {
+#ifdef __linux__
+    srand(time(nullptr));
+#endif
+
     handle_ = GAL_CreateGeneticAlgorithm(100, 60, 0, 1);
     GAL_CalculateFitness(handle_, OneMaxProblem::fitnessFunction, this);
     GAL_SortIndividuals(handle_, OneMaxProblem::sortFunction, this);

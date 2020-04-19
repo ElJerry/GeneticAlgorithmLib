@@ -38,7 +38,6 @@ public:
             instances[handle].reset(new T(args...));
         }
 
-        printf("Returning %d handle\n", handle);
         return handle;
     }
 

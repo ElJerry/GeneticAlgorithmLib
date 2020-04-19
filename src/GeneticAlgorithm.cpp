@@ -52,7 +52,7 @@ void GeneticAlgorithm::crossOver() {
             // Check for mutation
             int mutationAux = rand() % 101;
             if (mutationAux <= MUTATION_PROBABILITY) {
-                //TODO: Right now mutation only works for 0 or 1 values
+                //TODO: Right now mutation only works for GA's with 0 and 1 values
                 if (newIndividual.genes[j] == 0) {
                     newIndividual.genes[j] = 1;
                 }

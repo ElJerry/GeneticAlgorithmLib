@@ -9,5 +9,5 @@ add_executable(examples
     )
 
 include_directories(../include/public)
-
+add_dependencies(examples GeneticAlgorithmLib)
 target_link_libraries(examples GeneticAlgorithmLib)

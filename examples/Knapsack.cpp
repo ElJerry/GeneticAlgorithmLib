@@ -2,67 +2,78 @@
 #include <iostream>
 #include <string>
 
-
-std::string Knapsack::getProblemName() {
+std::string Knapsack::getProblemName()
+{
     return "Knapsack problem";
 }
 
-bool Knapsack::sortFunction(void* context, const float A, const float B){
+bool Knapsack::sortFunction(void *context, const float A, const float B)
+{
     return A > B;
 }
 
-std::string genesToString(const int genes[], const int size) {
+std::string genesToString(const int genes[], const int size)
+{
     std::string s = "";
 
-    for (int i = 0 ; i < size ; i++) {
+    for (int i = 0; i < size; i++)
+    {
         s += std::to_string(genes[i]);
 
-        if (i < size-1) {
+        if (i < size - 1)
+        {
             s += "-";
         }
-    }    
-
+    }
 
     return s;
 }
 
-void Knapsack::printProductsFromSolution(GAL_Individual solution) {
+void Knapsack::printProductsFromSolution(GAL_Individual solution)
+{
     const int *genes = solution.genes;
     const int size = solution.size;
 
     std::cout << "============ ITEMS ============" << std::endl;
-    for (int i = 0 ; i < size ; i++) {
-        if (genes[i]) {
-            std::cout << items_[i].name_ << " V:" << items_[i].value_ << " W:" << items_[i].weight_ << std::endl;
+    for (int i = 0; i < size; i++)
+    {
+        if (genes[i])
+        {
+            std::cout << items_[i]._name << " V:" << items_[i]._value << " W:" << items_[i]._weight << std::endl;
         }
     }
 }
 
-void Knapsack::executeProblem(){
+void Knapsack::executeProblem()
+{
     configureProblem();
-    
+
     int iterations = 50;
 
-    while(iterations--) {
+    while (iterations--)
+    {
         iterate();
     }
 
     // Get optimal solution
     GAL_Individual optimal = GAL_GetIndividual(handle_, 0);
-    std::cout << "Optimal solution: " << genesToString(optimal.genes, optimal.size) << std::endl << "fitness: " << optimal.fitness << std::endl;
+    std::cout << "Optimal solution: " << genesToString(optimal.genes, optimal.size) << std::endl
+              << "fitness: " << optimal.fitness << std::endl;
     printProductsFromSolution(optimal);
-
 }
 
-float Knapsack::fitnessFunction(void* context, const int genes[], const int size){
-    Knapsack *knapsack_ = (Knapsack*)context;
+float Knapsack::fitnessFunction(void *context, const int genes[], const int size)
+{
+    Knapsack *knapsack_ = (Knapsack *)context;
     float weight = 0;
     float value = 0;
 
-    for (int i = 0 ; i < size ; i++) {
-        if (genes[i]) {
-            weight += knapsack_->items_[i].weight_;
-            value += knapsack_->items_[i].value_;
+    for (int i = 0; i < size; i++)
+    {
+        if (genes[i])
+        {
+            weight += knapsack_->items_[i]._weight;
+            value += knapsack_->items_[i]._value;
         }
     }
 
@@ -74,7 +85,8 @@ float Knapsack::fitnessFunction(void* context, const int genes[], const int size
     return value;
 }
 
-void Knapsack::iterate(){
+void Knapsack::iterate()
+{
 
     GAL_CalculateFitness(handle_, fitnessFunction, this);
     GAL_SortIndividuals(handle_, sortFunction, nullptr);
@@ -82,11 +94,12 @@ void Knapsack::iterate(){
     GAL_SortIndividuals(handle_, sortFunction, nullptr);
 }
 
-void Knapsack::configureProblem() {
+void Knapsack::configureProblem()
+{
     // Define bag capacity
     bagCapacity_ = 5; //kilograms
 
-    items_ = std::vector<item> {
+    items_ = std::vector<item>{
         {"Burguer", 1, 3},
         {"Xbox", 3, 500},
         {"Laptop", 3, 1200},

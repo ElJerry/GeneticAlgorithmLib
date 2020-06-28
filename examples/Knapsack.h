@@ -6,24 +6,25 @@
 
 #include "Problem.h"
 
-class Knapsack : public Problem {
+class Knapsack : public Problem
+{
 private:
-
-    struct item {
-        std::string name_;
-        int weight_;
-        int value_;
+    struct item
+    {
+        std::string _name;
+        int _weight;
+        int _value;
     };
 
     GAL_HANDLE handle_;
     int bagCapacity_; // kilograms
     std::vector<item> items_;
-    
+
     void configureProblem();
     void iterate();
     void printProductsFromSolution(GAL_Individual ind);
-    static bool sortFunction(void* context, const float A, const float B);
-    static float fitnessFunction(void* context, const int genes[], const int size);
+    static bool sortFunction(void *context, const float A, const float B);
+    static float fitnessFunction(void *context, const int genes[], const int size);
 
 public:
     std::string getProblemName() override;

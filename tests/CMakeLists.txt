@@ -2,9 +2,29 @@ project(test)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(test testMain.cpp)
+include_directories(
+    ../include/public
+    ../Dependencies/testing
+)
 
-include_directories(../include/public)
+set(UNIT_TEST_LIST
+  fakeTest)
+ 
+foreach(NAME IN LISTS UNIT_TEST_LIST)
+  list(APPEND UNIT_TEST_SOURCE_LIST
+    ${NAME}.test.cpp)
+endforeach()
+ 
+set(TARGET_NAME tests)
+ 
+add_executable(${TARGET_NAME}
+  testMain.cpp
+  ${UNIT_TEST_SOURCE_LIST})
+  
+add_dependencies(${TARGET_NAME} GeneticAlgorithmLib)
 
-add_dependencies(test GeneticAlgorithmLib)
-target_link_libraries(test GeneticAlgorithmLib)
+target_link_libraries(${TARGET_NAME} GeneticAlgorithmLib)
+
+add_test(
+  NAME ${TARGET_NAME}
+  COMMAND ${TARGET_NAME} -o report.xml -r junit)

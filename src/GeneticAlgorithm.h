@@ -6,7 +6,8 @@
 
 #include "Individual.h"
 
-class GeneticAlgorithm {
+class GeneticAlgorithm
+{
 private:
     std::vector<Individual> population;
     int mPopulationSize, mIndividualSize;
@@ -16,11 +17,11 @@ public:
     bool isInRage(int id);
     GeneticAlgorithm(int population, int individualSize, int minGene, int maxGene);
 
-    void calculateFitness(GAL_FitnessFunction fitnessFunction, void* context);
+    void calculateFitness(GAL_FitnessFunction fitnessFunction, void *context);
     void crossOver();
     void printIndividual(int id);
-    Individual* getIndividual(int id);
-    void sortIndividuals(GAL_SortFunction sortFunction, void* context);
+    Individual *getIndividual(int id);
+    void sortIndividuals(GAL_SortFunction sortFunction, void *context);
     int getPopulationSize();
 };
 

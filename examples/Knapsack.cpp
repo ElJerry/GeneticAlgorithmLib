@@ -105,9 +105,7 @@ void Knapsack::configureProblem()
         {"Laptop", 3, 1200},
         {"Candy", 1, 10},
         {"IPhone", 1, 900},
-        {"USB drive", 1, 20}
-
-    };
+        {"USB drive", 1, 20}};
 
     handle_ = GAL_CreateGeneticAlgorithm(50, items_.size(), 0, 1);
     std::cout << "Configured!" << std::endl;

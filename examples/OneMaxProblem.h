@@ -5,7 +5,8 @@
 
 #include "Problem.h"
 
-class OneMaxProblem: public Problem {
+class OneMaxProblem : public Problem
+{
 private:
     GAL_HANDLE handle_;
 
@@ -13,14 +14,12 @@ private:
     void iterate();
     void initializeProblem();
 
-    static float fitnessFunction(void* context, const int genes[], int size);
-    static bool sortFunction(void* context, float individualA, float individualB);
-
+    static float fitnessFunction(void *context, const int genes[], int size);
+    static bool sortFunction(void *context, float individualA, float individualB);
 
 public:
     std::string getProblemName() override;
     void executeProblem() override;
 };
-
 
 #endif //GENETICALGORITHMLIB_ONEMAXPROBLEM_H

@@ -7,16 +7,14 @@
 
 using namespace std;
 
-int main() {
-
+int main()
+{
     auto problem = unique_ptr<Problem>(new OneMaxProblem());
 
     cout << "Executing " << problem->getProblemName() << endl;
     problem->executeProblem();
 
-
     problem = unique_ptr<Problem>(new Knapsack());
     cout << "Executing " << problem->getProblemName() << endl;
     problem->executeProblem();
-
 }

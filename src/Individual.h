@@ -4,7 +4,8 @@
 #include <vector>
 #include <public/GeneticAlgorithmLib.h>
 
-class Individual{
+class Individual
+{
 public:
     Individual(int size, int min, int max);
     Individual();
@@ -12,9 +13,7 @@ public:
     float fitness;
 
     void printIndividual(int id);
-    float calculateFitness(GAL_FitnessFunction fitnessFunction, void* context);
-
+    float calculateFitness(GAL_FitnessFunction fitnessFunction, void *context);
 };
-
 
 #endif //GENETICALGORITHMLIB_INDIVIDUAL_H

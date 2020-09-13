@@ -4,23 +4,27 @@
 
 MemoryManager<GeneticAlgorithm> memManager;
 
-GAL_HANDLE GAL_CreateGeneticAlgorithm(int populationSize, int individualSize, int minGene, int maxGene){
+GAL_HANDLE GAL_CreateGeneticAlgorithm(int populationSize, int individualSize, int minGene, int maxGene)
+{
     int handle = memManager.create(populationSize, individualSize, minGene, maxGene);
     return handle;
 }
 
-void GAL_DestroyGeneticAlgorithm(GAL_HANDLE handle){
+void GAL_DestroyGeneticAlgorithm(GAL_HANDLE handle)
+{
     memManager.destroy(handle);
 }
 
-GAL_Individual GAL_GetIndividual(GAL_HANDLE handle, int individualId){
+GAL_Individual GAL_GetIndividual(GAL_HANDLE handle, int individualId)
+{
     auto ga = memManager.get(handle);
 
-    if (!ga->isInRage(individualId)){
+    if (!ga->isInRage(individualId))
+    {
         return GAL_Individual{};
     }
 
-    Individual* ind = ga->getIndividual(individualId);
+    Individual *ind = ga->getIndividual(individualId);
 
     // Transform Individual to GAL_Individual
     int size = ind->genes.size();
@@ -33,38 +37,44 @@ GAL_Individual GAL_GetIndividual(GAL_HANDLE handle, int individualId){
     return galIndividual;
 }
 
-void GAL_CalculateFitness(GAL_HANDLE handle, GAL_FitnessFunction fitnessFunction, void* context){
+void GAL_CalculateFitness(GAL_HANDLE handle, GAL_FitnessFunction fitnessFunction, void *context)
+{
     auto ga = memManager.get(handle);
     ga->calculateFitness(fitnessFunction, context);
 }
 
-void GAL_Crossover(GAL_HANDLE handle){
+void GAL_Crossover(GAL_HANDLE handle)
+{
     auto ga = memManager.get(handle);
     ga->crossOver();
 }
 
-void GAL_PrintIndividuals(GAL_HANDLE handle){
+void GAL_PrintIndividuals(GAL_HANDLE handle)
+{
     auto ga = memManager.get(handle);
     int populationSize = ga->getPopulationSize();
     printf("======= Population Individuals =======\n");
-    for (int i=0 ; i < populationSize; i++){
+    for (int i = 0; i < populationSize; i++)
+    {
         ga->printIndividual(i);
     }
     printf("======================================\n");
-
 }
 
-void GAL_PrintIndividual(GAL_HANDLE handle, int individualId){
+void GAL_PrintIndividual(GAL_HANDLE handle, int individualId)
+{
     auto ga = memManager.get(handle);
 
-    if (!ga->isInRage(individualId)){
+    if (!ga->isInRage(individualId))
+    {
         return;
     }
 
     ga->printIndividual(individualId);
 }
 
-void GAL_SortIndividuals(GAL_HANDLE handle, GAL_SortFunction function, void* context){
+void GAL_SortIndividuals(GAL_HANDLE handle, GAL_SortFunction function, void *context)
+{
     auto ga = memManager.get(handle);
     ga->sortIndividuals(function, context);
 }

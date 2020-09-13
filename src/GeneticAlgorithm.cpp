@@ -6,7 +6,8 @@
 #define MUTATION_PROBABILITY 5
 
 // Genetic Algorithm
-GeneticAlgorithm::GeneticAlgorithm(int population, int individualSize, int minGene, int maxGene) {
+GeneticAlgorithm::GeneticAlgorithm(int population, int individualSize, int minGene, int maxGene)
+{
     mPopulationSize = population;
     mIndividualSize = individualSize;
     mMaxGene = maxGene;
@@ -14,49 +15,60 @@ GeneticAlgorithm::GeneticAlgorithm(int population, int individualSize, int minGe
     this->population.clear();
 
     //Fill population with new individuals
-    while(population--) {
+    while (population--)
+    {
         this->population.push_back(Individual(individualSize, minGene, maxGene));
     }
 }
 
-bool GeneticAlgorithm::isInRage(int id) {
+bool GeneticAlgorithm::isInRage(int id)
+{
     if (id >= mPopulationSize)
         return false;
 
     return true;
 }
 
-void GeneticAlgorithm::calculateFitness(GAL_FitnessFunction func, void* context) {
-    for (int i=0 ; i < population.size() ; i++) {
+void GeneticAlgorithm::calculateFitness(GAL_FitnessFunction func, void *context)
+{
+    for (int i = 0; i < population.size(); i++)
+    {
         population[i].calculateFitness(func, context);
     }
 }
 
-
-void GeneticAlgorithm::crossOver() {
+void GeneticAlgorithm::crossOver()
+{
     std::vector<Individual> newIndividuals;
-    for (int i=0 ; i < mPopulationSize ; i = i + 2) {
-        if (i+1 >= mPopulationSize)
+    for (int i = 0; i < mPopulationSize; i = i + 2)
+    {
+        if (i + 1 >= mPopulationSize)
             continue;
 
         Individual newIndividual;
 
-        for(int j=0 ; j< mIndividualSize ; j++) {
-            if(rand() % 2) {
+        for (int j = 0; j < mIndividualSize; j++)
+        {
+            if (rand() % 2)
+            {
                 newIndividual.genes.push_back(population[i].genes[j]);
             }
-            else {
-                newIndividual.genes.push_back(population[i+1].genes[j]);
+            else
+            {
+                newIndividual.genes.push_back(population[i + 1].genes[j]);
             }
 
             // Check for mutation
             int mutationAux = rand() % 101;
-            if (mutationAux <= MUTATION_PROBABILITY) {
+            if (mutationAux <= MUTATION_PROBABILITY)
+            {
                 //TODO: Right now mutation only works for GA's with 0 and 1 values
-                if (newIndividual.genes[j] == 0) {
+                if (newIndividual.genes[j] == 0)
+                {
                     newIndividual.genes[j] = 1;
                 }
-                else {
+                else
+                {
                     newIndividual.genes[j] = 0;
                 }
             }
@@ -68,25 +80,30 @@ void GeneticAlgorithm::crossOver() {
     // Replace last n/2 individuals with the new ones
     int firstIndex = population.size() / 2;
     int newIndex = 0;
-    for (int i = firstIndex; i < population.size(); i++) {
+    for (int i = firstIndex; i < population.size(); i++)
+    {
         population[i] = newIndividuals[newIndex++];
     }
 }
 
-void GeneticAlgorithm::printIndividual(int id) {
+void GeneticAlgorithm::printIndividual(int id)
+{
     population[id].printIndividual(id);
 }
 
-Individual* GeneticAlgorithm::getIndividual(int id) {
+Individual *GeneticAlgorithm::getIndividual(int id)
+{
     return &population[id];
 }
 
-void GeneticAlgorithm::sortIndividuals(GAL_SortFunction sortFunction, void* context) {
-    std::sort(population.begin(), population.end(), [=](const Individual &i1, const Individual &i2){
+void GeneticAlgorithm::sortIndividuals(GAL_SortFunction sortFunction, void *context)
+{
+    std::sort(population.begin(), population.end(), [=](const Individual &i1, const Individual &i2) {
         return sortFunction(context, i1.fitness, i2.fitness);
     });
 }
 
-int GeneticAlgorithm::getPopulationSize() {
+int GeneticAlgorithm::getPopulationSize()
+{
     return mPopulationSize;
 }

@@ -10,45 +10,54 @@
 #define MAX_MEM_SIZE 500
 
 template <class T>
-class MemoryManager {
+class MemoryManager
+{
 private:
     std::vector<std::shared_ptr<T>> instances;
     std::queue<int> nextSlot;
 
 public:
-    MemoryManager() {
+    MemoryManager()
+    {
         instances = std::vector<std::shared_ptr<T>>(MAX_MEM_SIZE);
 
         // fill nextSlot with empty positions
-        for (int i = 0; i < MAX_MEM_SIZE ; i++) {
+        for (int i = 0; i < MAX_MEM_SIZE; i++)
+        {
             nextSlot.push(i);
         }
     };
 
-    template <class ...ARGS>
-    int create(ARGS ...args) {
+    template <class... ARGS>
+    int create(ARGS... args)
+    {
 
-        if (nextSlot.empty()) {
+        if (nextSlot.empty())
+        {
             return -1;
         }
 
-        int handle = nextSlot.front(); nextSlot.pop();
+        int handle = nextSlot.front();
+        nextSlot.pop();
 
-        if (instances[handle].get() == nullptr) {
+        if (instances[handle].get() == nullptr)
+        {
             instances[handle].reset(new T(args...));
         }
 
         return handle;
     }
 
-    void destroy(int handle) {
+    void destroy(int handle)
+    {
         instances[handle].reset();
 
         // add this empty slot to nextSlot queue
         nextSlot.push(handle);
     }
 
-    std::shared_ptr<T> get(int handle){
+    std::shared_ptr<T> get(int handle)
+    {
         return instances[handle];
     }
 };

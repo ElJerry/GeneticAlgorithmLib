@@ -4,11 +4,11 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(
     ../include/public
-    ../Dependencies/testing
+    ../Dependencies/Testing
 )
 
 set(UNIT_TEST_LIST
-  fakeTest)
+  Individual)
  
 foreach(NAME IN LISTS UNIT_TEST_LIST)
   list(APPEND UNIT_TEST_SOURCE_LIST

@@ -25,6 +25,4 @@ add_dependencies(${TARGET_NAME} GeneticAlgorithmLib)
 
 target_link_libraries(${TARGET_NAME} GeneticAlgorithmLib)
 
-add_test(
-  NAME ${TARGET_NAME}
-  COMMAND ${TARGET_NAME} -o report.xml -r junit)
+add_test(NAME ${TARGET_NAME} COMMAND ${TARGET_NAME})

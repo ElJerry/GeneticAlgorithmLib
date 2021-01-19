@@ -9,8 +9,8 @@ class Individual
 public:
     Individual(int size, int min, int max);
     Individual();
-    std::vector<int> genes;
-    float fitness;
+    std::vector<int> genes_;
+    float fitness_;
 
     void printIndividual(int id);
     float calculateFitness(GAL_FitnessFunction fitnessFunction, void *context);

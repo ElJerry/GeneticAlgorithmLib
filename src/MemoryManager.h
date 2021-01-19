@@ -13,18 +13,18 @@ template <class T>
 class MemoryManager
 {
 private:
-    std::vector<std::shared_ptr<T>> instances;
-    std::queue<int> nextSlot;
+    std::vector<std::shared_ptr<T>> instances_;
+    std::queue<int> nextSlot_;
 
 public:
     MemoryManager()
     {
-        instances = std::vector<std::shared_ptr<T>>(MAX_MEM_SIZE);
+        instances_ = std::vector<std::shared_ptr<T>>(MAX_MEM_SIZE);
 
         // fill nextSlot with empty positions
         for (int i = 0; i < MAX_MEM_SIZE; i++)
         {
-            nextSlot.push(i);
+            nextSlot_.push(i);
         }
     };
 
@@ -32,17 +32,17 @@ public:
     int create(ARGS... args)
     {
 
-        if (nextSlot.empty())
+        if (nextSlot_.empty())
         {
             return -1;
         }
 
-        int handle = nextSlot.front();
-        nextSlot.pop();
+        int handle = nextSlot_.front();
+        nextSlot_.pop();
 
-        if (instances[handle].get() == nullptr)
+        if (instances_[handle].get() == nullptr)
         {
-            instances[handle].reset(new T(args...));
+            instances_[handle].reset(new T(args...));
         }
 
         return handle;
@@ -50,15 +50,15 @@ public:
 
     void destroy(int handle)
     {
-        instances[handle].reset();
+        instances_[handle].reset();
 
         // add this empty slot to nextSlot queue
-        nextSlot.push(handle);
+        nextSlot_.push(handle);
     }
 
     std::shared_ptr<T> get(int handle)
     {
-        return instances[handle];
+        return instances_[handle];
     }
 };
 

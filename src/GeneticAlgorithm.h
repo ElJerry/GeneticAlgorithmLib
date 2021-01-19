@@ -10,8 +10,8 @@ class GeneticAlgorithm
 {
 private:
     std::vector<Individual> population;
-    int mPopulationSize, mIndividualSize;
-    int mMinGene, mMaxGene;
+    int populationSize_, individualSize_;
+    int minGene_, maxGene_;
 
 public:
     bool isInRage(int id);

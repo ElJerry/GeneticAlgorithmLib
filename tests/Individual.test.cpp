@@ -7,7 +7,7 @@ TEST_CASE("Individual fitness calculation tests")
     SECTION("Individual fitness calculation succeeds")
     {
         Individual testIndividual(5, 0, 1);
-        testIndividual.genes = {0, 1, 1, 0, 0};
+        testIndividual.genes_ = {0, 1, 1, 0, 0};
         float fitness = testIndividual.calculateFitness([](void *context, const int genes[], const int size) {
             float sum = 0;
             for (int i = 0; i < size; i++)
@@ -24,6 +24,6 @@ TEST_CASE("Individual fitness calculation tests")
     SECTION("Individual constructor works as expected")
     {
         Individual testIndividual(10, 0, 1);
-        REQUIRE(testIndividual.genes.size() == 10);
+        REQUIRE(testIndividual.genes_.size() == 10);
     }
 }

@@ -5,43 +5,43 @@
 // Individual
 Individual::Individual()
 {
-    fitness = 0;
+    fitness_ = 0;
 }
 
 Individual::Individual(int size, int min, int max)
 {
-    genes.resize(size);
+    genes_.resize(size);
 
     for (int i = 0; i < size; i++)
     {
-        genes[i] = (rand() % ((max - min) + 1)) + min;
+        genes_[i] = (rand() % ((max - min) + 1)) + min;
     }
 
-    fitness = 0;
+    fitness_ = 0;
 }
 
 void Individual::printIndividual(int id)
 {
     printf("=== Individual %d ===\n", id);
     printf("Genes: ");
-    for (auto i = genes.begin(); i != genes.end(); i++)
+    for (auto i = genes_.begin(); i != genes_.end(); i++)
     {
         printf("%d", *i);
     }
     printf("\n");
 
-    printf("Fitness: %.2f\n", fitness);
+    printf("Fitness: %.2f\n", fitness_);
 }
 
 float Individual::calculateFitness(GAL_FitnessFunction fitnessFunction, void *context)
 {
-    std::vector<int> genes_int(genes.size());
+    std::vector<int> genes_int(genes_.size());
 
-    for (int i = 0; i < genes.size(); i++)
+    for (int i = 0; i < genes_.size(); i++)
     {
-        genes_int[i] = genes[i];
+        genes_int[i] = genes_[i];
     }
 
-    fitness = fitnessFunction(context, genes_int.data(), genes.size());
-    return fitness;
+    fitness_ = fitnessFunction(context, genes_int.data(), genes_.size());
+    return fitness_;
 }

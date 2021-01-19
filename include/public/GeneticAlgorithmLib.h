@@ -23,6 +23,8 @@ extern "C"
 
     typedef bool (*GAL_SortFunction)(void *context, const float individualA, const float individualB);
 
+    typedef int (*GAL_MutationFunction)(void *context, int gene);
+
     GAL_HANDLE GAL_CreateGeneticAlgorithm(int populationSize, int individualSize, int minGene, int maxGene);
 
     void GAL_DestroyGeneticAlgorithm(GAL_HANDLE handle);
@@ -35,6 +37,8 @@ extern "C"
     void GAL_CalculateFitness(GAL_HANDLE handle, GAL_FitnessFunction, void *context);
 
     void GAL_Crossover(GAL_HANDLE handle);
+
+    void GAL_CrossoverWithMutationFunction(GAL_HANDLE handle, GAL_MutationFunction function, void *context);
 
     void GAL_PrintIndividuals(GAL_HANDLE handle);
 

@@ -8,6 +8,6 @@ add_executable(examples
         Knapsack.cpp
     )
 
-include_directories(../include/public)
+include_directories(${CMAKE_SOURCE_DIR}/include/public)
 add_dependencies(examples GeneticAlgorithmLib)
 target_link_libraries(examples GeneticAlgorithmLib)

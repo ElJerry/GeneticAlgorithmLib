@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <algorithm>
 #include <iostream>
+#include <functional>
 #include "GeneticAlgorithm.h"
 
 #define MUTATION_PROBABILITY 5
@@ -37,7 +38,7 @@ void GeneticAlgorithm::calculateFitness(GAL_FitnessFunction func, void *context)
     }
 }
 
-void GeneticAlgorithm::crossOver()
+void GeneticAlgorithm::crossOver(GAL_MutationFunction mutationCallback, void *context)
 {
     std::vector<Individual> newIndividuals;
     for (int i = 0; i < populationSize_; i = i + 2)
@@ -62,14 +63,9 @@ void GeneticAlgorithm::crossOver()
             int mutationAux = rand() % 101;
             if (mutationAux <= MUTATION_PROBABILITY)
             {
-                //TODO: Right now mutation only works for GA's with 0 and 1 values
-                if (newIndividual.genes_[j] == 0)
+                if (mutationCallback != nullptr)
                 {
-                    newIndividual.genes_[j] = 1;
-                }
-                else
-                {
-                    newIndividual.genes_[j] = 0;
+                    newIndividual.genes_[j] = mutationCallback(context, newIndividual.genes_[j]);
                 }
             }
         }

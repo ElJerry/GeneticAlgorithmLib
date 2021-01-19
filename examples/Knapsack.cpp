@@ -90,6 +90,12 @@ void Knapsack::iterate()
 
     GAL_CalculateFitness(handle_, fitnessFunction, this);
     GAL_SortIndividuals(handle_, sortFunction, nullptr);
+    // GAL_CrossoverWithMutationFunction(
+    //     handle_, [](void *context, int gen) {
+    //         std::cout << "GERRY: MUTACION ACTIVADA" << std::endl;
+    //         return 0;
+    //     },
+    //     nullptr);
     GAL_Crossover(handle_);
     GAL_SortIndividuals(handle_, sortFunction, nullptr);
 }

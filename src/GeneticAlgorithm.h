@@ -18,7 +18,7 @@ public:
     GeneticAlgorithm(int population, int individualSize, int minGene, int maxGene);
 
     void calculateFitness(GAL_FitnessFunction fitnessFunction, void *context);
-    void crossOver();
+    void crossOver(GAL_MutationFunction mutationCallback, void *context);
     void printIndividual(int id);
     Individual *getIndividual(int id);
     void sortIndividuals(GAL_SortFunction sortFunction, void *context);

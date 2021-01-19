@@ -45,8 +45,13 @@ void GAL_CalculateFitness(GAL_HANDLE handle, GAL_FitnessFunction fitnessFunction
 
 void GAL_Crossover(GAL_HANDLE handle)
 {
+    GAL_CrossoverWithMutationFunction(handle, nullptr, nullptr);
+}
+
+void GAL_CrossoverWithMutationFunction(GAL_HANDLE handle, GAL_MutationFunction function, void *context)
+{
     auto ga = memManager_.get(handle);
-    ga->crossOver();
+    ga->crossOver(function, context);
 }
 
 void GAL_PrintIndividuals(GAL_HANDLE handle)

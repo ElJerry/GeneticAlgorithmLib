@@ -8,7 +8,8 @@ include_directories(
 )
 
 set(UNIT_TEST_LIST
-  Individual)
+  Individual
+  MemoryManager)
  
 foreach(NAME IN LISTS UNIT_TEST_LIST)
   list(APPEND UNIT_TEST_SOURCE_LIST

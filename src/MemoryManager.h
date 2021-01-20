@@ -7,26 +7,28 @@
 #include <queue>
 #include <memory>
 
-#define MAX_MEM_SIZE 500
-
 template <class T>
 class MemoryManager
 {
 private:
     std::vector<std::shared_ptr<T>> instances_;
     std::queue<int> nextSlot_;
+    int maxMemSize_ = 500;
 
 public:
-    MemoryManager()
+    MemoryManager(int maxElementSize)
     {
-        instances_ = std::vector<std::shared_ptr<T>>(MAX_MEM_SIZE);
+        maxMemSize_ = maxElementSize;
+        instances_ = std::vector<std::shared_ptr<T>>(maxMemSize_);
 
         // fill nextSlot with empty positions
-        for (int i = 0; i < MAX_MEM_SIZE; i++)
+        for (int i = 0; i < maxMemSize_; i++)
         {
             nextSlot_.push(i);
         }
-    };
+    }
+
+    MemoryManager() : MemoryManager(500){};
 
     template <class... ARGS>
     int create(ARGS... args)

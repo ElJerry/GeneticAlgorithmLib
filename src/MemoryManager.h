@@ -4,7 +4,7 @@
 #include <vector>
 #include <cstdio>
 #include <iostream>
-#include <queue>
+#include <set>
 #include <memory>
 
 template <class T>
@@ -12,7 +12,7 @@ class MemoryManager
 {
 private:
     std::vector<std::shared_ptr<T>> instances_;
-    std::queue<int> nextSlot_;
+    std::set<int> freeSlots_;
     int maxMemSize_ = 500;
 
 public:
@@ -24,7 +24,7 @@ public:
         // fill nextSlot with empty positions
         for (int i = 0; i < maxMemSize_; i++)
         {
-            nextSlot_.push(i);
+            freeSlots_.insert(i);
         }
     }
 
@@ -34,13 +34,14 @@ public:
     int create(ARGS... args)
     {
 
-        if (nextSlot_.empty())
+        if (freeSlots_.empty())
         {
             return -1;
         }
 
-        int handle = nextSlot_.front();
-        nextSlot_.pop();
+        // grab an available handle from the set
+        int handle = *freeSlots_.begin();
+        freeSlots_.erase(handle);
 
         if (instances_[handle].get() == nullptr)
         {
@@ -55,7 +56,7 @@ public:
         instances_[handle].reset();
 
         // add this empty slot to nextSlot queue
-        nextSlot_.push(handle);
+        freeSlots_.insert(handle);
     }
 
     std::shared_ptr<T> get(int handle)
